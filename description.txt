@@ -1,0 +1,63 @@
+App Description: PharrroHealth AI Diabetes Assistant
+
+1. High-Level Vision
+
+PharrroHealth is a modern, AI-powered mobile web application designed to simplify diabetes and health management. It serves as a personal health assistant, allowing users to track key metrics—glucose levels, weight, blood pressure, meals, and medication—through intuitive and intelligent interfaces. The app's core strengths are its use of cutting-edge AI to reduce the manual effort of logging and its clear, data-driven visualizations for monitoring health trends.
+
+2. Current Features (As Built)
+
+*   **Core Architecture:** A responsive, mobile-first application built with React, TypeScript, and styled with Tailwind CSS for a clean, native-like feel.
+
+*   **Main Interface & Navigation:**
+    *   **Dashboard:** Provides an at-a-glance summary, including the latest readings for glucose, weight, and blood pressure, a 24-hour glucose average, and an interactive trend chart visualizing glucose levels over time.
+    *   **Activity Feed:** A reverse-chronological, paginated list of all log entries (glucose, meals, medication, weight, blood pressure), allowing users to see the relationship between events.
+    *   **History / Late Entry:** A dedicated page for backdating entries. It features a guided, two-step process where the user first confirms the date and time, then gains access to the full suite of logging tools for that specific moment.
+
+*   **Unified Logging Experience:** The app offers two primary logging workflows:
+    1.  **Live Logging:** Via a floating action button that opens an action sheet, leading to dedicated modals for immediate data entry.
+    2.  **Back-dating:** Via the "History" page, which allows logging any past event.
+
+*   **AI-Powered Logging Suite:** For each data type, the app provides multiple intelligent input methods:
+    *   **Glucose Logging:**
+        *   **Voice (Gemini Live API):** Real-time transcription of spoken readings (e.g., "7.8 after dinner"), which are then parsed by Gemini for value and context.
+        *   **Photo (Gemini Vision API):** Extracts the numerical reading and unit directly from a photo of a glucose meter or CGM screen.
+        *   **Manual:** A standard form for value and context.
+    *   **Weight Logging:**
+        *   **Voice (Gemini Live API):** Transcribes and parses spoken weight entries (e.g., "85.5 kilograms").
+        *   **Photo (Gemini Vision API):** Extracts the numerical value and unit from a photo of a digital weight scale.
+        *   **Manual:** A standard form for value and unit (kg/lbs).
+    *   **Blood Pressure Logging:**
+        *   **Voice (Gemini Live API):** Transcribes and parses spoken readings (e.g., "120 over 80 with a pulse of 65").
+        *   **Photo (Gemini Vision API):** Extracts systolic, diastolic, and pulse numbers from a photo of a blood pressure monitor.
+        *   **Manual:** A standard form for all three values.
+    *   **Meal Logging:**
+        *   **Photo (Gemini Vision API):** The primary method. Analyzes a photo of a meal to identify food items and estimate nutritional content (focusing on carbohydrates).
+        *   **Manual:** A simple form for a meal description and total carbs, available on the History page.
+    *   **Medication Logging:**
+        *   **Voice (Gemini Live API):** Transcribes spoken medication intake and uses Gemini to match it against the user's pre-configured medication list to identify the drug and quantity.
+        *   **Manual:** A dropdown list of the user's medications and a quantity input.
+
+*   **Personalized Medication Management:**
+    *   A "My Medications" section (via the Settings icon) allows users to create and manage a personal formulary.
+    *   To streamline setup, the "Add Medication" form features an autocomplete function that suggests common UK diabetes medications and their default dosages.
+
+*   **Data Visualization:**
+    *   The dashboard's glucose chart is powered by Recharts, providing a clear visual representation of trends with color-coded data points and high/low reference lines for immediate insight.
+
+3. Future Enhancements (Roadmap)
+
+*   **Deeper AI Integration & Logging Features:**
+    *   **Voice-based Meal Logging:** Implement the existing `parseMealFromText` service to allow users to log meals by describing them (e.g., "I had a chicken salad and an apple").
+    *   **Advanced Manual Meal Entry:** Enhance the manual meal form to allow adding multiple distinct food items with individual nutritional details.
+
+*   **Data Insights & Reporting:**
+    *   **Dedicated Reports Page:** Create a new section for deeper analysis, showing weekly/monthly trends, time-in-range statistics, and A1c estimations.
+    *   **Data Export:** Allow users to export their logs as a CSV or PDF to share with healthcare providers.
+
+*   **User Experience & Management:**
+    *   **Editing & Deleting Logs:** Implement functionality to edit or delete existing entries from the Activity feed to correct mistakes.
+    *   **Smarter Reminders:** Expand beyond the post-meal reminder to include configurable alerts for medications, fasting tests, and more.
+    *   **User Onboarding:** Add a brief tutorial for first-time users to highlight the powerful AI logging features.
+
+*   **Critical Infrastructure:**
+    *   **Backend & Data Persistence:** The current app is a frontend prototype with in-memory state. The highest priority for a production version is to implement a backend (e.g., Firebase, Supabase) for user authentication, data persistence, and synchronization across devices.

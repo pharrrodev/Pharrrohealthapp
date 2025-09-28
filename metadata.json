@@ -1,0 +1,8 @@
+{
+  "name": "Copy of PharrroHealth V2 after phot glucoe log ",
+  "description": "version simple before the rest of changes 27-9-2025 saturday",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
